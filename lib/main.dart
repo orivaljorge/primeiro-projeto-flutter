@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool opacidade = true;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +32,8 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.blue,
         ),
         body: AnimatedOpacity(
-          opacity: 1,
-          duration: Duration(milliseconds: 20000),
+          opacity: opacidade ? 1 : 0,
+          duration: Duration(milliseconds: 2000),
           child: ListView(
             scrollDirection: Axis.vertical,
             children: [
@@ -52,13 +59,20 @@ class MyApp extends StatelessWidget {
               ),
               Task(
                 'Ler',
-                'https://thebogotapost.com/wp-content/uploads/2017/06/636052464065850579-137719760_flyer-image-1.jpg',
+                'assets/images/livro.jpg', // caminho local da imagem
                 2,
               ),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {}),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          setState(() {
+            opacidade = !opacidade;
+          });
+        },
+          backgroundColor: Colors.blue[100],
+          child: Icon(Icons.remove_red_eye, color: Colors.blue,),
+        ),
       ),
     );
   }
@@ -109,7 +123,9 @@ class _TaskState extends State<Task> {
                         color: Colors.black26,
                         width: 72,
                         height: 100,
-                        child: Image.network(widget.foto, fit: BoxFit.cover),
+                        child: widget.foto.startsWith('http')
+                            ? Image.network(widget.foto, fit: BoxFit.cover)
+                            : Image.asset(widget.foto, fit: BoxFit.cover),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
