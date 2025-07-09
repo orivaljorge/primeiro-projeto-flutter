@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:primeiro_projeto/components/difficulty.dart';
-
 
 class Task extends StatefulWidget {
   final String name;
@@ -17,29 +15,39 @@ class Task extends StatefulWidget {
 class _TaskState extends State<Task> {
   int level = 0;
 
+  Color getBackgroundColor(double progress) {
+    if (progress == 1) return Colors.green;
+    if (progress > 0.7 && progress < 1) return Colors.red;
+    if (progress > 0.4 && progress <= 0.7) return Colors.orange;
+    return Colors.blue;
+  }
+
   @override
   Widget build(BuildContext context) {
+    double progress = (widget.difficulty > 0)
+        ? (level / widget.difficulty) / 10
+        : 1;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        color: Colors.blue,
+        color: getBackgroundColor(progress),
         child: Stack(
           children: [
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
-                color: Colors.blue,
+                color: getBackgroundColor(progress),
               ),
               height: 140,
             ),
             Column(
               children: [
                 Container(
-                  decoration:BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     color: Colors.white,
                   ),
-                  // color: Colors.white,
                   height: 100,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,22 +76,21 @@ class _TaskState extends State<Task> {
                         height: 58,
                         width: 64,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: (progress >= 1)
+                              ? null
+                              : () {
                             setState(() {
                               level++;
                             });
-                            // print(level);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
-                            // cor de fundo do botão
-                            foregroundColor:
-                            Colors.white, // cor do ícone ou texto
+                            foregroundColor: Colors.white,
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
+                            children: const [
                               Icon(Icons.arrow_drop_up, size: 20),
                               Text(
                                 'UP',
@@ -106,17 +113,15 @@ class _TaskState extends State<Task> {
                         width: 250,
                         child: LinearProgressIndicator(
                           color: Colors.white,
-                          value:
-                          (widget.difficulty > 0)
-                              ? (level / widget.difficulty) / 10
-                              : 1,
+                          backgroundColor: Colors.black12,
+                          value: progress.clamp(0.0, 1.0),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(12),
                       child: Text(
-                        'Nivel: $level',
+                        'Nível: $level',
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
