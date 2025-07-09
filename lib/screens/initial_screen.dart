@@ -31,22 +31,22 @@ class _InitialScreenState extends State<InitialScreen> {
           children: [
             Task(
               'Aprender Flutter',
-              'https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large',
+              'assets/images/aprender.png',
               1,
             ),
             Task(
               'Jogar',
-              'https://i.ibb.co/tB29PZB/kako-epifania-2022-2-c-pia.jpg',
-              0,
+              'assets/images/jogar.jpg',
+              2,
             ),
             Task(
               'Meditar',
-              'https://manhattanmentalhealthcounseling.com/wp-content/uploads/2019/06/Top-5-Scientific-Findings-on-MeditationMindfulness-881x710.jpeg',
+              'assets/images/meditar.jpeg',
               4,
             ),
             Task(
               'Andar de bicicleta',
-              'https://images.pexels.com/photos/161172/cycling-bike-trail-sport-161172.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+              'assets/images/bike.jpeg',
               5,
             ),
             Task(
@@ -54,6 +54,7 @@ class _InitialScreenState extends State<InitialScreen> {
               'assets/images/livro.jpg', // caminho local da imagem
               2,
             ),
+            SizedBox(height: 80),
           ],
         ),
       ),
