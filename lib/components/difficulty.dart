@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Difficulty extends StatelessWidget {
-  final int dificultyLevel;
+  final int difficultyLevel;
   const Difficulty({
-    required this.dificultyLevel,
+    required this.difficultyLevel,
     super.key,
   });
 
@@ -16,7 +16,7 @@ class Difficulty extends StatelessWidget {
           Icons.star,
           size: 15,
           color:
-          dificultyLevel >= 1
+          difficultyLevel >= 1
               ? Colors.blue
               : Colors.blue[100],
         ),
@@ -24,7 +24,7 @@ class Difficulty extends StatelessWidget {
           Icons.star,
           size: 15,
           color:
-          dificultyLevel >= 2
+          difficultyLevel >= 2
               ? Colors.blue
               : Colors.blue[100],
         ),
@@ -32,7 +32,7 @@ class Difficulty extends StatelessWidget {
           Icons.star,
           size: 15,
           color:
-          dificultyLevel >= 3
+          difficultyLevel >= 3
               ? Colors.blue
               : Colors.blue[100],
         ),
@@ -40,7 +40,7 @@ class Difficulty extends StatelessWidget {
           Icons.star,
           size: 15,
           color:
-          dificultyLevel >= 4
+          difficultyLevel >= 4
               ? Colors.blue
               : Colors.blue[100],
         ),
@@ -48,7 +48,7 @@ class Difficulty extends StatelessWidget {
           Icons.star,
           size: 15,
           color:
-          dificultyLevel >= 5
+          difficultyLevel >= 5
               ? Colors.blue
               : Colors.blue[100],
         ),

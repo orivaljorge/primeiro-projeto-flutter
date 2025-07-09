@@ -4,18 +4,18 @@ import 'package:primeiro_projeto/components/difficulty.dart';
 
 
 class Task extends StatefulWidget {
-  final String nome;
-  final String foto;
-  final int dificuldade;
+  final String name;
+  final String picture;
+  final int difficulty;
 
-  const Task(this.nome, this.foto, this.dificuldade, {super.key});
+  const Task(this.name, this.picture, this.difficulty, {super.key});
 
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
+  int level = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -48,34 +48,38 @@ class _TaskState extends State<Task> {
                         color: Colors.black26,
                         width: 72,
                         height: 100,
-                        child: widget.foto.startsWith('http')
-                            ? Image.network(widget.foto, fit: BoxFit.cover)
-                            : Image.asset(widget.foto, fit: BoxFit.cover),
+                        child: widget.picture.startsWith('http')
+                            ? Image.network(widget.picture, fit: BoxFit.cover)
+                            : Image.asset(widget.picture, fit: BoxFit.cover),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            child: Text(
-                              widget.nome,
-                              style: TextStyle(fontSize: 30),
-                              overflow: TextOverflow.ellipsis,
-                            ),
+                          Text(
+                            widget.name,
+                            style: TextStyle(fontSize: 30),
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          Difficulty(dificultyLevel: widget.dificuldade),
+                          Difficulty(difficultyLevel: widget.difficulty),
                         ],
                       ),
-                      Container(
+                      SizedBox(
                         height: 58,
                         width: 64,
                         child: ElevatedButton(
                           onPressed: () {
                             setState(() {
-                              nivel++;
+                              level++;
                             });
-                            print(nivel);
+                            // print(level);
                           },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            // cor de fundo do botão
+                            foregroundColor:
+                            Colors.white, // cor do ícone ou texto
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -88,12 +92,6 @@ class _TaskState extends State<Task> {
                               ),
                             ],
                           ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            // cor de fundo do botão
-                            foregroundColor:
-                            Colors.white, // cor do ícone ou texto
-                          ),
                         ),
                       ),
                     ],
@@ -104,13 +102,13 @@ class _TaskState extends State<Task> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8),
-                      child: Container(
+                      child: SizedBox(
                         width: 250,
                         child: LinearProgressIndicator(
                           color: Colors.white,
                           value:
-                          (widget.dificuldade > 0)
-                              ? (nivel / widget.dificuldade) / 10
+                          (widget.difficulty > 0)
+                              ? (level / widget.difficulty) / 10
                               : 1,
                         ),
                       ),
@@ -118,7 +116,7 @@ class _TaskState extends State<Task> {
                     Padding(
                       padding: const EdgeInsets.all(12),
                       child: Text(
-                        'Nivel: $nivel',
+                        'Nivel: $level',
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
