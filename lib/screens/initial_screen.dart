@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:primeiro_projeto/components/task.dart';
+
+import 'form_screen.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -10,8 +11,6 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
-  bool opacidade = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,48 +22,30 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
         backgroundColor: Colors.blue,
       ),
-      body: AnimatedOpacity(
-        opacity: opacidade ? 1 : 0,
-        duration: Duration(milliseconds: 2000),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: [
-            Task(
-              'Aprender Flutter',
-              'assets/images/aprender.png',
-              1,
-            ),
-            Task(
-              'Jogar',
-              'assets/images/jogar.jpg',
-              2,
-            ),
-            Task(
-              'Meditar',
-              'assets/images/meditar.jpeg',
-              4,
-            ),
-            Task(
-              'Andar de bicicleta',
-              'assets/images/bike.jpeg',
-              5,
-            ),
-            Task(
-              'Ler',
-              'assets/images/livro.jpg', // caminho local da imagem
-              2,
-            ),
-            SizedBox(height: 80),
-          ],
-        ),
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        children: [
+          Task('Aprender Flutter', 'assets/images/aprender.png', 1),
+          Task('Jogar', 'assets/images/jogar.jpg', 2),
+          Task('Meditar', 'assets/images/meditar.jpeg', 4),
+          Task('Andar de bicicleta', 'assets/images/bike.jpeg', 5),
+          Task(
+            'Ler',
+            'assets/images/livro.jpg', // caminho local da imagem
+            2,
+          ),
+          SizedBox(height: 80),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        setState(() {
-          opacidade = !opacidade;
-        });
-      },
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => FormScreen()),
+          );
+        },
         backgroundColor: Colors.blue[100],
-        child: Icon(Icons.remove_red_eye, color: Colors.blue,),
+        child: Icon(Icons.add, color: Colors.blue),
       ),
     );
   }
